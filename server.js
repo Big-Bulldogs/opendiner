@@ -18,7 +18,15 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
 
-
+app.post('/newrestaurant', ({body}, res) => {
+    db.Restaurant.create(body)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+})
 
 
 app.listen(PORT, () => {
