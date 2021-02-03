@@ -11,7 +11,17 @@ const RestaurantSchema = new Schema({
   },
   address: {
     type: String
-  }
+  },
+  webpage: {
+    type: String
+  },
+  hours: {
+    type: Array
+  },
+  menu: {
+    type: Schema.Types.String,
+    ref: "Menu"
+ }
 });
 
 const Restaurant = mongoose.model("Restaurant", RestaurantSchema);
