@@ -6,6 +6,12 @@ const MenuSchema = new Schema({
   name: {
     type: String
   },
+  restaurant: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant"
+    }
+  ],
   item: [
     {
       type: Schema.Types.ObjectId,

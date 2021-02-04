@@ -17,17 +17,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
-
-app.post('/newrestaurant', ({body}, res) => {
-    db.Restaurant.create(body)
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-})
-
+mongoose.set('useFindAndModify', false);
+require('./routes/api-routes')(app)
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
