@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
-
+mongoose.set('useFindAndModify', false);
 require('./routes/api-routes')(app)
 
 app.listen(PORT, () => {
