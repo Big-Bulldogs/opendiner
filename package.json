@@ -16,5 +16,9 @@
     "url": "https://github.com/Big-Bulldogs/opendiner/issues"
   },
   "homepage": "https://github.com/Big-Bulldogs/opendiner#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "passport": "^0.4.1",
+    "passport-oauth": "^1.0.0"
+  }
 }
