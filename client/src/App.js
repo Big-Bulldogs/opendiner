@@ -1,8 +1,10 @@
 import './App.css';
 import Appbar from './components/Appbar'
+
 import {Row, Col } from 'reactstrap';
 import Map from './components/map'
 import SimpleList from './components/Applist'
+
 function App() {
   
   return (

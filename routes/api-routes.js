@@ -1,4 +1,4 @@
-const db = require("../models/schema");
+const db = require("../models");
 
 
 module.exports = function(app){

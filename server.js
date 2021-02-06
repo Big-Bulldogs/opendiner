@@ -3,10 +3,10 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const PORT = process.env.PORT || 3005;
-import passport from './config/passport';
+const passport = require('./config/passport');
 var session = require("express-session");
 
-const db = require("./models/schema");
+const db = require("./models");
 
 
 const app = express();

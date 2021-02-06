@@ -16,9 +16,16 @@
     "url": "https://github.com/Big-Bulldogs/opendiner/issues"
   },
   "homepage": "https://github.com/Big-Bulldogs/opendiner#readme",
-  "description": "",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.15",
+    "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-oauth": "^1.0.0"
-  }
+    "passport-local": "^1.0.0"
+  },
+  "description": ""
 }
