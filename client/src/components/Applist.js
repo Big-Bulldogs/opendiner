@@ -6,9 +6,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import {connect} from 'react-redux'
 import API from '../utils/API'
-
+import {updateData} from '../store/actions/fetchRestaurants'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +22,7 @@ function ListItemLink(props) {
     return <ListItem button component="a" {...props} />;
 }
 
-export default function SimpleList() {
+const SimpleList = (props) => {
     const classes = useStyles();
 
     useEffect(() => {
@@ -42,3 +42,16 @@ export default function SimpleList() {
         </div>
     );
 }
+
+const mapStateToProps = state => {
+    return {
+        restaurant: state.restaurant
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        onDataChange: () => dispatch(updateData())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps) (SimpleList)
