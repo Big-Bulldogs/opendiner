@@ -1,7 +1,10 @@
 import './App.css';
 import Appbar from './components/Appbar'
+
 import {Row, Col } from 'reactstrap';
 import Map from './components/map'
+import SimpleList from './components/Applist'
+
 function App() {
   
   return (
@@ -9,7 +12,9 @@ function App() {
       <Appbar />
      <div className="restaurants">
      <Row>
-        <Col xs="4">.col-3</Col>
+        <Col xs="4">
+          <SimpleList/>
+        </Col>
         <Col xs="4">.col-auto - variable width content</Col>
         
         <Col xs="4">

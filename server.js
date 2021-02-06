@@ -3,8 +3,10 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const PORT = process.env.PORT || 3005;
+const passport = require('./config/passport');
+var session = require("express-session");
 
-const db = require("./models/schema");
+const db = require("./models");
 
 
 const app = express();
@@ -13,6 +15,13 @@ app.use(logger("dev"));
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+//Not sure how to configure this yet
+// app.get("/", function (req, res) { 
+//   res.sendFile(__dirname + "/public/login.html");
+// });
 
 app.use(express.static("public"));
 
