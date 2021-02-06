@@ -1,4 +1,4 @@
-import React from 'react',
+import React from 'react';
 import {MDCRipple} from '@material/ripple';
 
 const selector = '.mdc-button, .mdc-icon-button, .mdc-card__primary-action';
