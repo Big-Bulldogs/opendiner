@@ -6,6 +6,7 @@ const ripples = [].map.call(document.querySelectorAll(selector), function(el) {
   return new MDCRipple(el);
 });
 
+//starter code for card usage
 //<div class="mdc-card">
 //
 //</div>
