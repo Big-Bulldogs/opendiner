@@ -10,3 +10,10 @@ const ripples = [].map.call(document.querySelectorAll(selector), function(el) {
 //<div class="mdc-card">
 //
 //</div>
+
+//<div class="mdc-card">
+//  <div class="mdc-card__primary-action" tabindex="0">
+//    <!-- content within actionable area -->
+//  </div>
+//  <!-- ... content ... -->
+//</div>
