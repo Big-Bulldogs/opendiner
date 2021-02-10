@@ -10,8 +10,9 @@ export const update = (res) => {
 
 export const updateData = () => {
     return dispatch => {
-        API.getRestaurants
+        API.getRestaurants()
         .then(res => {
+            console.log(res.data)
             dispatch(update(res.data))
         })
 
