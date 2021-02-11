@@ -7,7 +7,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {connect} from 'react-redux'
-import API from '../utils/API'
 import {updateData} from '../store/actions/fetchRestaurants'
 
 const useStyles = makeStyles((theme) => ({
@@ -25,19 +24,19 @@ function ListItemLink(props) {
 const SimpleList = (props) => {
     const classes = useStyles();
 
-    useEffect(() => {
-        API.getRestaurants()
-        .then(res => {
-            console.log(res.data)
-        })
-    })
-
+    useEffect(() => props.onDataChange(), [])
+    
     return (
         <div className={classes.root}>
-            <List component="nav" aria-label="main mailbox folders">
-                <ListItem>
-                </ListItem>
-                <h1>Hello</h1> 
+            <List>
+                {props.restaurants.map(r => (
+            <ListItemLink key={r._id}href="#simple-list">
+            <ListItemText primary={r.name} />
+
+            </ListItemLink>
+                ))}
+            
+                
             </List>
         </div>
     );
@@ -45,7 +44,7 @@ const SimpleList = (props) => {
 
 const mapStateToProps = state => {
     return {
-        restaurant: state.restaurant
+        restaurants: state.restaurants
     }
 }
 
