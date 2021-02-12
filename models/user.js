@@ -3,32 +3,33 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  name: [{
-    first: String,
-    last: String
-  }],
-  email: 
+  firstname: {
+    type: String,
+  },
+
+  lastname: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  password: {
+    type: String,
+  },
+  previousorders: [
     {
-      type: String
-    },
-  password:
-    {
-      type: String
-    },
-  previousorders:[
-    {
-    type: Schema.Types.ObjectId,
-    ref: "Order"
+      type: Schema.Types.ObjectId,
+      ref: "Order",
     },
   ],
-  previousrestaurants:[
+  previousrestaurants: [
     {
-    type: Schema.Types.ObjectId,
-    ref: "Restaurant"
-    }
-  ]
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant",
+    },
+  ],
 });
 
-const Menu = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
 
 module.exports = User;

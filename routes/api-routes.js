@@ -2,6 +2,16 @@ const db = require("../models");
 
 
 module.exports = function(app){
+    app.post('/newuser', ({body}, res) => {
+        db.User.create(body)
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          res.json(err);
+        });
+    });
+
     app.post('/newrestaurant', ({body}, res) => {
         db.Restaurant.create(body)
         .then(data => {
@@ -9,6 +19,17 @@ module.exports = function(app){
         })
         .catch(err => {
           res.json(err);
+        });
+    });
+
+    app.get('/user', (req, res) => {
+        db.User.find({})
+        .populate('user')
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
         });
     });
 
