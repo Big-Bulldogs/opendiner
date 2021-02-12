@@ -4,13 +4,15 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';;
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import {connect} from 'react-redux';
+import {updateData} from '../store/actions/fetchRestaurants'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 1200,
+    minHeight: "100vh"
   },
   media: {
     height: 140,
