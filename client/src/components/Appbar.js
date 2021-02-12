@@ -184,6 +184,11 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <MenuItem>
+        <IconButton aria-label="location-searching">
+            <LocationSearchingIcon />
+        </IconButton>
+      </MenuItem>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
