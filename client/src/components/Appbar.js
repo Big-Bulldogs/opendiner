@@ -116,6 +116,11 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem>
+        <IconButton aria-label="location-searching">
+            <LocationSearchingIcon />
+        </IconButton>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
