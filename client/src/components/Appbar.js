@@ -13,6 +13,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -149,6 +150,11 @@ export default function PrimarySearchAppBar() {
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="location-searching">
+            <LocationSearchingIcon />
+        </IconButton>
       </MenuItem>
     </Menu>
   );
