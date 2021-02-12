@@ -16,7 +16,7 @@ function App() {
             <SimpleList />
           </Col>
           <Col xs="4">
-            <Appcard />
+            <AppCard />
           </Col>
           <Col xs="4">
             <Map />
