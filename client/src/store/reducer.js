@@ -1,5 +1,6 @@
 const initialState = {
-    restaurants: []
+    restaurants: [],
+    currentLocation: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -9,8 +10,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 restaurants: action.value
             }
+        case 'GETLOC':
+            return{
+                ...state,
+                currentLocation: action.value
+            }
     }
     return state
 }
 
 export default reducer
+
