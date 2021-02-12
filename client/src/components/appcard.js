@@ -27,17 +27,11 @@ const RestaurantCard=(props)=>{
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={image}
-          title={name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">{name}
+          <Typography gutterBottom variant="h5" component="h2">
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            <div>{phone}</div>
-            <div>{hours}</div>
-            <div>{address}</div>
-            <div>{menu}</div>
           </Typography>
         </CardContent>
       </CardActionArea>
