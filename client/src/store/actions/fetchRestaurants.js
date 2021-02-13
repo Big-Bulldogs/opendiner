@@ -1,6 +1,6 @@
 import API from '../../utils/API'
 export const UPDATE = 'UPDATE'
-
+export const SETLOCATION = "SETLOCATION"
 export const update = (res) => {
     return{
         type: UPDATE,
@@ -16,5 +16,13 @@ export const updateData = () => {
             dispatch(update(res.data))
         })
 
+    }
+}
+
+export const setLocation = (res) => {
+    console.log("restaurant", res)
+    return{
+        type: SETLOCATION,
+        value: res
     }
 }
