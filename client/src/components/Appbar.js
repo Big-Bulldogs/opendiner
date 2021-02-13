@@ -14,6 +14,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
+import {connect} from 'react-redux'
+import {getLocation} from '../store/actions/getLocation'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -80,7 +82,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+
+const PrimarySearchAppBar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -157,7 +160,7 @@ export default function PrimarySearchAppBar() {
         <p>Profile</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="location-searching">
+        <IconButton  aria-label="location-searching">
             <LocationSearchingIcon />
         </IconButton>
       </MenuItem>
@@ -225,3 +228,18 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+
+const mapStateToProps = state => {
+  return {
+    currentLocation: state.currentLocation
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    onGetLocation: () => dispatch(getLocation())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (PrimarySearchAppBar)

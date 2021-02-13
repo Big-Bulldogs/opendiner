@@ -12,7 +12,7 @@ export const getLocation = () => {
         navigator.geolocation.getCurrentPosition(show)
         function show(position){
             
-            dispatch(location(position.coords))
+            dispatch(location(position.coords.latitude,position.coords.longitude))
         }
         
         
