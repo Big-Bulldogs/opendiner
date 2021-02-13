@@ -18,3 +18,13 @@ export const updateData = () => {
 
     }
 }
+
+export const SETLOCATION = "SETLOCATION"
+
+export const setLocation = (res) => {
+    console.log('hit in action ', res)
+    return{
+        type: SETLOCATION,
+        value: res
+    }
+}
