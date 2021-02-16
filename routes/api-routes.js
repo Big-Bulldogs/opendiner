@@ -35,7 +35,13 @@ module.exports = function(app){
 
     app.get('/restaurant', (req, res) => {
         db.Restaurant.find({})
-        .populate('menu')
+        .populate({
+            path: 'menu',
+            populate: {
+                path: 'item',
+                model: 'Item'
+            }
+        })
         .then(data => {
             res.json(data)
         })
