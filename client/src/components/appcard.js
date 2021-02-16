@@ -11,8 +11,7 @@ import {updateData} from '../store/actions/fetchRestaurants'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 1200,
-    minHeight: "100vh"
+    maxWidth: 345,
   },
   media: {
     height: 140,

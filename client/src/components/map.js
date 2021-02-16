@@ -4,12 +4,8 @@ import {connect} from 'react-redux'
 import {getLocation} from '../store/actions/getLocation'
 
 const Map = (props) => {
-  useEffect(() => props.onGetLocation(), [])
-  console.log(props.currentLocation)
-  let lat = 51
-  let lon =  -3
-return (
-    <MapContainer center={[lat, lon]} zoom={13} scrollWheelZoom={false}>
+  return (
+    <MapContainer center={props.currentLocation} zoom={10} scrollWheelZoom={false}>
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
