@@ -1,11 +1,8 @@
 const initialState = {
     restaurants: [],
-<<<<<<< HEAD
-    currentLocation: [],
-=======
     currentLocation: [51.5,55],
->>>>>>> 7d90874779c274eadc2b00ff0095b15ae3d5f65a
-    selectedLocation: {}
+    selectedLocation: {},
+    hasLoaded: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,14 +18,15 @@ const reducer = (state = initialState, action) => {
                 currentLocation: action.value
             }
         case 'SETLOCATION':
-<<<<<<< HEAD
-            console.log('hit set location')
-=======
             console.log('hit set')
->>>>>>> 7d90874779c274eadc2b00ff0095b15ae3d5f65a
             return{
                 ...state,
                 selectedLocation: action.value
+            }
+        case 'HASLOADED':
+            return{
+                ...state,
+                hasLoaded: action.value
             }
     }
     return state

@@ -1,6 +1,8 @@
+import { forceUpdate } from 'react';
 import API from '../../utils/API'
 export const UPDATE = 'UPDATE'
 export const SETLOCATION = "SETLOCATION"
+export const HASLOADED = "HASLOADED"
 export const update = (res) => {
     return{
         type: UPDATE,
@@ -19,17 +21,18 @@ export const updateData = () => {
     }
 }
 
-<<<<<<< HEAD
-export const SETLOCATION = "SETLOCATION"
-
-export const setLocation = (res) => {
-    console.log('hit in action ', res)
-=======
 export const setLocation = (res) => {
     console.log("restaurant", res)
->>>>>>> 7d90874779c274eadc2b00ff0095b15ae3d5f65a
+    // forceUpdate();
     return{
         type: SETLOCATION,
         value: res
+    } 
+}
+
+export const load =()=>{
+    return{
+        type: HASLOADED,
+        value: true
     }
 }
