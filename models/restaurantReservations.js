@@ -6,5 +6,11 @@ const ReservationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Restaurant",
   },
-  
+  reservationDate: {
+      type: Array
+  },
+  reservationTime: {
+      type: Array
+  },
+
 });
