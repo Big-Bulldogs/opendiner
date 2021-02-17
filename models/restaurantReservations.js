@@ -3,23 +3,19 @@ const Schema = mongoose.Schema;
 
 const ReservationSchema = new Schema({
   restaurant: mongoose.Schema({
-
     type: Schema.Types.ObjectId,
     ref: "Restaurant",
   }),
   reservationDate: {
-      type: Array
+    type: Array,
   },
   reservationTime: {
-      type: Array
+    type: Array,
   },
-  reservationMenu: {
+  reservationOrder: {
     type: Schema.Types.ObjectId,
-    ref: "reservationMenu"
-
+    ref: "reservationOrder",
   },
-
-
 });
 
 const Reservation = mongoose.model("reservation", ReservationSchema);
