@@ -12,10 +12,14 @@ const ReservationSchema = new Schema({
   reservationTime: {
     type: Array,
   },
-  reservationOrder: {
+  Order: mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "reservationOrder",
-  },
+  }),
+  user: mongoose.Schema({
+    type: Schema.Types.ObjectId,
+    ref: "user",
+  }),
 });
 
 const Reservation = mongoose.model("reservation", ReservationSchema);
