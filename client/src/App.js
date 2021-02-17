@@ -2,7 +2,7 @@ import "./App.css";
 import Appbar from "./components/Appbar";
 
 import { Row, Col } from "reactstrap";
-import Map from "./components/map";
+import Map from "./components/Map";
 import SimpleList from "./components/Applist";
 import AppCard from "./components/Appcard";
 

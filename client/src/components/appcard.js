@@ -96,6 +96,7 @@ function RestaurantCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           {(props.hasLoaded === true) ? (
+            (props.selectedLocation.menu) ? (
             <p>
               {props.selectedLocation.menu.item.map((i) => (
                 <Typography>
@@ -105,6 +106,9 @@ function RestaurantCard(props) {
                   </Typography>
               ))}
             </p>
+            ):(
+              <p> No menu items to display</p>
+             )
           ) : (
             <p>No menu items to display</p>
           )}
