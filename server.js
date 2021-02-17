@@ -6,13 +6,14 @@ const PORT = process.env.PORT || 3005;
 const passport = require('./config/passport');
 const AdminBro = require('admin-bro')
 const AdminBroExpress = require('@admin-bro/express')
+const AdminBroMongoose = require('@admin-bro/mongoose')
 var session = require("express-session");
 
 const db = require("./models");
 
 
 const app = express();
-
+AdminBro.registerAdapter(AdminBroMongoose)
 app.use(logger("dev"));
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
@@ -25,17 +26,25 @@ app.use(passport.session());
 //   res.sendFile(__dirname + "/public/login.html");
 // });
 
-const adminBro = new AdminBro({
-  databases: [],
-  rootPath: '/admin',
-})
 
-const router = AdminBroExpress.buildRouter(adminBro)
+
+const run = async() => {
+  const connection = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
+
+  const adminBro = new AdminBro({
+    databases: [connection],
+    rootPath: '/admin',
+  })
+
+  const router = AdminBroExpress.buildRouter(adminBro)
+  app.use(adminBro.options.rootPath, router)
+}
+run()
+
 
 app.use(express.static("public"));
-app.use(adminBro.options.rootPath, router)
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
-mongoose.set('useFindAndModify', false);
+
+// mongoose.set('useFindAndModify', false);
 require('./routes/api-routes')(app)
 
 app.listen(PORT, () => {
