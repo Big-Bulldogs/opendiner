@@ -21,7 +21,19 @@ const RestaurantSchema = new Schema({
   menu: {
     type: Schema.Types.ObjectId,
     ref: "Menu"
- }
+ },
+ previousorders: [
+  {
+    type: Schema.Types.ObjectId,
+    ref: "Order",
+  },
+],
+previousrestaurants: [
+  {
+    type: Schema.Types.ObjectId,
+    ref: "Restaurant",
+  },
+],
 });
 
 const Restaurant = mongoose.model("Restaurant", RestaurantSchema);
