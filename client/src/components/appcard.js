@@ -44,6 +44,7 @@ function RestaurantCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -103,7 +104,7 @@ function RestaurantCard(props) {
                   <p>{i.name}</p>
                   <p>{i.description}</p>
                   <p>{i.price}</p>
-                  </Typography>
+                </Typography>
               ))}
             </p>
             ):(

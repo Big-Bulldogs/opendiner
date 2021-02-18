@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Coustard:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 .App {
   text-align: center;
@@ -18,4 +19,8 @@ body{
   height: 850px;
   width: 100%;
   border-radius: 10px;
+}
+
+.MuiTypography-body1, .MuiTypography-body2{
+  font-family: 'Raleway', sans-serif !important
 }
