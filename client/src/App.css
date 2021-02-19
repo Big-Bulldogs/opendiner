@@ -24,3 +24,7 @@ body{
 .MuiTypography-body1, .MuiTypography-body2{
   font-family: 'Raleway', sans-serif !important
 }
+
+.MuiCardContent-root:last-child{
+  overflow:scroll
+}

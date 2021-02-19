@@ -7,19 +7,20 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: 750,
   },
   media: {
     height: 0,
@@ -35,40 +36,57 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
 function RestaurantCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const website= `https://${props.selectedLocation.webpage}`;
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="restaurant" className={classes.avatar}></Avatar>
+          <RestaurantIcon aria-label="restaurant" className={classes.avatar}></RestaurantIcon>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <MoreVertIcon />
           </IconButton>
         }
         title={props.selectedLocation.name}
         subheader={props.selectedLocation.address}
       />
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <MenuItem onClick={handleClose}>Make a reservation</MenuItem>
+        <MenuItem onClick={handleClose}>Place an online order</MenuItem>
+      </Menu>
       <CardMedia className={classes.media} image="" title="" />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.selectedLocation.phone_number}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.selectedLocation.webpage}
+          <a href={website}>{props.selectedLocation.webpage}</a>
         </Typography>
         <Typography>
           {props.hasLoaded === true ? (
@@ -95,25 +113,27 @@ function RestaurantCard(props) {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          {(props.hasLoaded === true) ? (
-            (props.selectedLocation.menu) ? (
-            <p>
-              {props.selectedLocation.menu.item.map((i) => (
-                <Typography>
-                  <p>{i.name}</p>
-                  <p>{i.description}</p>
-                  <p>{i.price}</p>
-                </Typography>
-              ))}
-            </p>
-            ):(
-              <p> No menu items to display</p>
-             )
-          ) : (
-            <p>No menu items to display</p>
-          )}
-        </CardContent>
+        <div className="menu">
+          <CardContent>
+            {props.hasLoaded === true ? (
+              props.selectedLocation.menu ? (
+                <p>
+                  {props.selectedLocation.menu.item.map((i) => (
+                    <Typography>
+                      <p>{i.name}</p>
+                      <p>{i.description}</p>
+                      <p>{i.price}</p>
+                    </Typography>
+                  ))}
+                </p>
+              ) : (
+                <p> No menu items to display</p>
+              )
+            ) : (
+              <p>No menu items to display</p>
+            )}
+          </CardContent>
+        </div>
       </Collapse>
     </Card>
   );
@@ -135,4 +155,3 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(RestaurantCard);
 
-// {props.selectedLocation.restaurant.hours.map(h=><Typography component="p">h</Typography>)}
