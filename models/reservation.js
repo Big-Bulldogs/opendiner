@@ -8,12 +8,12 @@ const ReservationSchema = new Schema({
     ref: "Restaurant",
 },
 ],
-/*reservationDate: {
+reservationDate: {
     type: date,
   },
   reservationTime: {
     type: time,
-  },*/
+  },
   Order: {
     type: string,
   },
