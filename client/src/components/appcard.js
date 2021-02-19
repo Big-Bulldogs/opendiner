@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RestaurantCard(props) {
+const RestaurantCard=(props)=>{
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -139,19 +139,16 @@ function RestaurantCard(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    selectedLocation: state.selectedLocation,
-    restaurant: state.restaurant,
-    hasLoaded: state.hasLoaded,
-  };
-};
+      restaurant: state.restaurant
+  }
+}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDataChange: () => dispatch(updateData()),
-  };
-};
+const mapDispatchToProps = dispatch => {
+  return{
+      onDataChange: () => dispatch(updateData())
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantCard);
-
+export default connect(mapStateToProps,mapDispatchToProps)(RestaurantCard);
