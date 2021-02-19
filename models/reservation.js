@@ -2,24 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ReservationSchema = new Schema({
-  restaurant: mongoose.Schema({
-    type: Schema.Types.ObjectId,
-    ref: "Restaurant",
-  }),
+  restaurant: {
+    type: string,
+  },
   reservationDate: {
-    type: Array,
+    type: date,
   },
   reservationTime: {
-    type: Array,
+    type: time,
   },
-  Order: mongoose.Schema({
-    type: Schema.Types.ObjectId,
-    ref: "reservationOrder",
-  }),
-  user: mongoose.Schema({
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  }),
+  Order: {
+    type: string,
+  },
+  user: {
+    type: string,
+  },
 });
 
 const Reservation = mongoose.model("reservation", ReservationSchema);
