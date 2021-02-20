@@ -1,28 +1,23 @@
 import "./App.css";
 import Appbar from "./components/Appbar";
+import Home from './pages/Home'
 
-import { Row, Col } from "reactstrap";
-import Map from "./components/Map";
-import SimpleList from "./components/Applist";
-import AppCard from "./components/Appcard";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 function App() {
   return (
     <div className="App">
+      <Router>
       <Appbar />
-      <div className="restaurants">
-        <Row>
-          <Col xs="4">
-            <SimpleList />
-          </Col>
-          <Col xs="4">
-            <AppCard />
-          </Col>
-          <Col xs="4">
-            <Map />
-          </Col>
-        </Row>
-      </div>
+      <Switch>
+      <Route exact path='/' component={Home}></Route>
+     
+      </Switch>
+      </Router>
     </div>
   );
 }

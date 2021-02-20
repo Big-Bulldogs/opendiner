@@ -141,7 +141,8 @@ const RestaurantCard=(props)=>{
 
 const mapStateToProps = state => {
   return {
-      restaurant: state.restaurant
+      restaurant: state.restaurant,
+      selectedLocation: state.selectedLocation
   }
 }
 
