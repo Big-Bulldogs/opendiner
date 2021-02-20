@@ -1,7 +1,7 @@
 import "./App.css";
 import Appbar from "./components/Appbar";
 import Home from './pages/Home'
-
+import OrderForm from './pages/OrderPage'
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +15,7 @@ function App() {
       <Appbar />
       <Switch>
       <Route exact path='/' component={Home}></Route>
-     
+     <Route path='/order' component={OrderForm}></Route>
       </Switch>
       </Router>
     </div>

@@ -14,7 +14,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import {Link} from 'react-router-dom'
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
 
@@ -78,7 +78,9 @@ const RestaurantCard=(props)=>{
         open={Boolean(anchorEl)}
         onClose={handleClose}>
         <MenuItem onClick={handleClose}>Make a reservation</MenuItem>
+        <Link to="/order">
         <MenuItem onClick={handleClose}>Place an online order</MenuItem>
+        </Link>
       </Menu>
       <CardMedia className={classes.media} image="" title="" />
       <CardContent>
@@ -142,7 +144,8 @@ const RestaurantCard=(props)=>{
 const mapStateToProps = state => {
   return {
       restaurant: state.restaurant,
-      selectedLocation: state.selectedLocation
+      selectedLocation: state.selectedLocation,
+      hasLoaded: state.hasLoaded
   }
 }
 
