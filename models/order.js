@@ -12,7 +12,7 @@ const OrderSchema = new Schema({
         type: Array
     },
     totalPrice: {
-        type: number
+        type: Number
     },
 });
 const Order = mongoose.model("Order", OrderSchema);
