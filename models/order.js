@@ -8,11 +8,11 @@ const OrderSchema = new Schema({
         ref: "Restaurant",
     },
 ],
-    name: {
-        type: integer,
+    itemsOrdered: {
+        type: Array
     },
-    price: {
-        type: integer,
+    totalPrice: {
+        type: Number
     },
 });
 const Order = mongoose.model("Order", OrderSchema);
