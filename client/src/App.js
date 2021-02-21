@@ -2,6 +2,9 @@ import "./App.css";
 import Appbar from "./components/Appbar";
 import Home from './pages/Home'
 import OrderForm from './pages/OrderPage'
+import Reservation from './pages/Reservation'
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +18,10 @@ function App() {
       <Appbar />
       <Switch>
       <Route exact path='/' component={Home}></Route>
+      <Route path='/signup' component={SignUp}></Route>
+      <Route path='/signin' component={SignIn}></Route>
      <Route path='/order' component={OrderForm}></Route>
+     <Route path='/reservation' component={Reservation}></Route>
       </Switch>
       </Router>
     </div>
