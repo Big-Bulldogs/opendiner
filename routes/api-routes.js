@@ -24,7 +24,7 @@ module.exports = function(app){
 
     app.get('/user', (req, res) => {
         db.User.find({})
-        .populate('user')
+        .populate('reservation')
         .then(data => {
             res.json(data)
         })
@@ -61,6 +61,17 @@ module.exports = function(app){
         })
     })
 
+    app.post('/newreservation', ({body}, res) => {
+        db.Reservation.create(body)
+        .then(({_id}) => db.User.findOneAndUpdate({_id: body.user}, { $push: { reservations: _id}}))
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => {
+            res.json(err)
+        })
+    })
+
     app.post('/newmenu', ({body}, res) => {
         db.Menu.create(body)
         .then(({_id}) => db.Restaurant.findOneAndUpdate({_id: body.restaurant}, { $push: { menu: _id}}))
@@ -82,5 +93,6 @@ module.exports = function(app){
             res.json(err)
         });
     });
+    
     
 }

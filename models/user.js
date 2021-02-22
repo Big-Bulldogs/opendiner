@@ -28,6 +28,12 @@ const UserSchema = new Schema({
       ref: "Restaurant",
     },
   ],
+  reservations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Reservation",
+    },
+  ]
 });
 
 const User = mongoose.model("User", UserSchema);
