@@ -15,7 +15,7 @@ user: [
 },
 ],
   dateantime: {
-    type: string,
+    type: String,
   },
 });
 
