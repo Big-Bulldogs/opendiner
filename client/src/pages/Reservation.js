@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper, TextField, Button } from "@material-ui/core";
+import {
+  Typography,
+  Paper,
+  TextField,
+  Button,
+  Card,
+  List,
+  ListItem,
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
@@ -14,45 +23,45 @@ const Reservation = (props) => {
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: 200,
+      width: 250,
     },
     header: {
       marginRight: "20px",
     },
   }));
   const currentTimeDate = Date.now();
-const classes = makeStyles()
-  // Setting our component's initial state
-  const [reservations, setReservations] = useState([])
-  const [formObject, setFormObject] = useState({})
-  // Load all books and store them with setBooks
+  const classes = useStyles();
+
+  const [reservations, setReservations] = useState([]);
+  const [formObject, setFormObject] = useState({});
+
   useEffect(() => {
-    loadReservations()
-  }, [])
+    loadReservations();
+  }, []);
 
   function loadReservations() {
-    API.getReservations()
-      .then(res => 
-        setReservations(res.data)
+    API.getUser()
+      .then(
+        (res) => console.log(res.data) //setReservations
       )
-      .catch(err => console.log(err));
-  };
+      .catch((err) => console.log(err));
+  }
 
   function handleInputChange(event) {
     const { dateTime, value } = event.target;
-    setFormObject({...formObject, [dateTime]: value})
-  };
+    setFormObject({ ...formObject, [dateTime]: value });
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault();
     if (formObject.dateTime) {
       API.postReservation({
-        dateandtime: formObject.dateTime,
+        dateandtime: formObject.dateTime.toISOString(),
       })
-        .then(res => loadReservations())
-        .catch(err => console.log(err));
+        .then((res) => loadReservations())
+        .catch((err) => console.log(err));
     }
-  };
+  }
 
   return (
     <>
@@ -71,11 +80,36 @@ const classes = makeStyles()
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleInputChange}
             />
           </p>
-          <Button type="submit" color="primary" variant="contained" size="small" >Schedule </Button>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            size="small"
+            onClick={handleFormSubmit}
+          >
+            Schedule{" "}
+          </Button>
         </form>
       </Paper>
+      <Typography component="h1">Reservation History</Typography>
+      {reservations.length ? (
+        <List>
+          {reservations.map((reservation) => (
+            <ListItem key={reservation._id}>
+              <Link to={"/reservations/" + reservation._id}>
+                <strong>
+                  {reservation.dateandtime} at
+                </strong>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      ) : (
+        <h3>No Results to Display</h3>
+      )}
     </>
   );
 };
@@ -94,7 +128,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reservation);
-
-
-///have Sam check API call and whether I need a handleSubmit
-//do we want a reservation history to display below on another card? 

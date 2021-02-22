@@ -14,7 +14,7 @@ user: [
   ref: "User",
 },
 ],
-  dateantime: {
+  dateandtime: {
     type: String,
   },
 });
