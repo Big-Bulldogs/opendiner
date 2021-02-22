@@ -9,5 +9,8 @@ export default {
     },
     getUser: function(userData){
         return axios.get('http://localhost:3005/user')
+    },
+    login: function(login){
+        return axios.post('http://localhost:3005/login',login)
     }
 }
