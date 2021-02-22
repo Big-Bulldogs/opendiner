@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import API from '../utils/API'
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,9 +54,11 @@ const Login = () => {
       <Button variant="contained" onClick={handleFormSubmit} color="primary">
   Login
 </Button>
+<Link to="/signup">
 <Button variant="contained" color="primary">
   Sign Up
 </Button>
+</Link>
       </div>
       
     </div>
