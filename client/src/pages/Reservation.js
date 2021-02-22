@@ -21,19 +21,19 @@ const Reservation = (props) => {
     },
   }));
   const currentTimeDate = Date.now();
+  const classes=useStyles();
 
-  // Setting our component's initial state
   const [reservations, setReservations] = useState([])
   const [formObject, setFormObject] = useState({})
-  // Load all books and store them with setBooks
+
   useEffect(() => {
     loadReservations()
   }, [])
 
   function loadReservations() {
-    API.getReservations()
+    API.getUser()
       .then(res => 
-        setReservations(res.data)
+        (console.log(res.data))
       )
       .catch(err => console.log(err));
   };
@@ -96,5 +96,3 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Reservation);
 
 
-///have Sam check API call and whether I need a handleSubmit
-//do we want a reservation history to display below on another card? 
