@@ -18,6 +18,9 @@ const RestaurantSchema = new Schema({
   hours: {
     type: Array
   },
+  image:{
+    type: String
+  },
   menu: {
     type: Schema.Types.ObjectId,
     ref: "Menu"

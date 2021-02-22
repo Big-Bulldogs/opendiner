@@ -49,6 +49,10 @@ const UserSchema = new Schema({
   ],
   third_party_auth: [ThirdPartyProviderSchema]
 });
+UserSchema.methods.validPassword = function( pwd ) {
+  // EXAMPLE CODE!
+  return ( this.password === pwd );
+};
 
 const User = mongoose.model("User", UserSchema);
 
