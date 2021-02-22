@@ -1,10 +1,9 @@
-import React from, { useState, useEffect } "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper, TextField, Button } from "@material-ui/core";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
-
 
 const Reservation = (props) => {
   const useStyles = makeStyles((theme) => ({
@@ -44,8 +43,16 @@ const Reservation = (props) => {
     setFormObject({...formObject, [dateTime]: value})
   };
 
-
-
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    if (formObject.dateTime) {
+      API.postReservation({
+        dateandtime: formObject.dateTime,
+      })
+        .then(res => loadReservations())
+        .catch(err => console.log(err));
+    }
+  };
 
   return (
     <>
