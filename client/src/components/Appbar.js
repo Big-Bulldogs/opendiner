@@ -15,7 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
 import {connect} from 'react-redux'
 import {getLocation} from '../store/actions/getLocation'
-
+import {Link} from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -170,9 +170,11 @@ const PrimarySearchAppBar = (props) => {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
+          <Link to='/home'>
           <Typography className={classes.title} variant="h6" noWrap>
             OpenDiner
           </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
