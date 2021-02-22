@@ -24,7 +24,7 @@ module.exports = function(app){
 
     app.get('/user', (req, res) => {
         db.User.find({})
-        .populate('reservation')
+        .populate('reservations')
         .then(data => {
             res.json(data)
         })

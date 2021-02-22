@@ -1,7 +1,20 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+const ThirdPartyProviderSchema = new mongoose.Schema({
+  provider_name: {
+    type: String,
+    default: null
+  },
+  provider_id: {
+    type: String,
+    default: null
+  },
+  provider_data: {
+    type: {},
+    default: null
+  }
+})
 const UserSchema = new Schema({
   firstname: {
     type: String,
@@ -31,9 +44,10 @@ const UserSchema = new Schema({
   reservations: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Reservation",
+      ref: "reservation",
     },
-  ]
+  ],
+  third_party_auth: [ThirdPartyProviderSchema]
 });
 
 const User = mongoose.model("User", UserSchema);
