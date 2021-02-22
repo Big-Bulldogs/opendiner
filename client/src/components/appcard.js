@@ -7,14 +7,14 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import RestaurantIcon from '@material-ui/icons/Restaurant';
+import RestaurantIcon from "@material-ui/icons/Restaurant";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import {Link} from 'react-router-dom'
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RestaurantCard=(props)=>{
+const RestaurantCard = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -55,16 +55,24 @@ const RestaurantCard=(props)=>{
     setAnchorEl(null);
   };
 
-  const website= `https://${props.selectedLocation.webpage}`;
+  const website = `https://${props.selectedLocation.webpage}`;
 
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <RestaurantIcon aria-label="restaurant" className={classes.avatar}></RestaurantIcon>
+          <RestaurantIcon
+            aria-label="restaurant"
+            className={classes.avatar}
+          ></RestaurantIcon>
         }
         action={
-          <IconButton aria-label="settings" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          <IconButton
+            aria-label="settings"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
             <MoreVertIcon />
           </IconButton>
         }
@@ -76,13 +84,20 @@ const RestaurantCard=(props)=>{
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Make a reservation</MenuItem>
+        onClose={handleClose}
+      >
+        <Link to="/reservation">
+          <MenuItem onClick={handleClose}>Make a reservation</MenuItem>
+        </Link>
         <Link to="/order">
-        <MenuItem onClick={handleClose}>Place an online order</MenuItem>
+          <MenuItem onClick={handleClose}>Place an online order</MenuItem>
         </Link>
       </Menu>
-      <CardMedia className={classes.media} image="" title="" />
+      <CardMedia
+        className={classes.media}
+        image={props.selectedLocation.image}
+        title="Food from restaurant"
+      />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.selectedLocation.phone_number}
@@ -139,20 +154,20 @@ const RestaurantCard=(props)=>{
       </Collapse>
     </Card>
   );
-}
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-      restaurant: state.restaurant,
-      selectedLocation: state.selectedLocation,
-      hasLoaded: state.hasLoaded
-  }
-}
+    restaurant: state.restaurant,
+    selectedLocation: state.selectedLocation,
+    hasLoaded: state.hasLoaded,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
-  return{
-      onDataChange: () => dispatch(updateData())
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDataChange: () => dispatch(updateData()),
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(RestaurantCard);
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantCard);
