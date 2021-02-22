@@ -21,7 +21,7 @@ const Reservation = (props) => {
     },
   }));
   const currentTimeDate = Date.now();
-
+const classes = makeStyles()
   // Setting our component's initial state
   const [reservations, setReservations] = useState([])
   const [formObject, setFormObject] = useState({})
@@ -73,7 +73,7 @@ const Reservation = (props) => {
               }}
             />
           </p>
-          <Button type="submit" color="primary" variant="contained" size="small" onClick={makeReservation}>Schedule </Button>
+          <Button type="submit" color="primary" variant="contained" size="small" >Schedule </Button>
         </form>
       </Paper>
     </>

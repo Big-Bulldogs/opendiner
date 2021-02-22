@@ -1,157 +1,75 @@
-import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import API from "../utils/API";
-
-function Signup() {
-  const [firstName, setFirstname] = useState();
-  const [lastName, setLastname] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("first name is " + firstName);
-    console.log("last name is " + lastName);
-    console.log("email is " + email);
-    console.log("password is " + password);
-  };
-
-  function UserCreation(){
-    API.postUser({
-    firstname:this.state.firstName,
-    lastname: this.state.lastName,
-    email: this.state.email,
-    password: this.state.password
-    })
-  .then(res=>console.log(res.data))
-  .catch(res=>console.log(err))
-  }
-  
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: "100%", // Fix IE 11 issue.
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
+import {React, useState} from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button';
+import API from '../utils/API'
+import { useHistory } from 'react-router-dom';
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(1),
+        width: theme.spacing(300),
+        height: theme.spacing(50),
+      },
     },
   }));
-  const classes = useStyles();
-
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={(e) => setFirstname(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                onChange={(e) => setLastname(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+const SignUp = () => {
+    const classes = useStyles();
+const [formObject, setFormObject] = useState({})
+function handleInputChange(event){
+    const {name,value} = event.target;
+    setFormObject({...formObject, [name]:value})
+    
+}
+let history = useHistory();
+function handleFormSubmit(event){
+    event.preventDefault()
+    API.postUser({
+        firstname: formObject.firstname,
+        lastname: formObject.lastname,
+        email: formObject.email,
+        password: formObject.password
+    })
+    .then(res => {
+        console.log(res.data)
+        history.push('/login')
+    })
+    .catch(err => console.log(err))
 }
 
-export default Signup;
+console.log(formObject)
+
+
+    return (
+<div className={classes.root}>
+      <Paper elevation={3}>
+      <div>
+      <TextField id="standard-basic" onChange={handleInputChange} name="firstname" label="First Name" />
+      </div>
+      <div>
+      <TextField id="standard-basic" onChange={handleInputChange} name="lastname" label="Last Name" />
+      </div>
+      
+          <div>
+      <TextField id="standard-basic" onChange={handleInputChange} name="email"  label="Email" />
+      </div>
+      <div>
+      <TextField id="standard-basic" onChange={handleInputChange} name="password"  label="Password" />
+      </div>
+      </Paper>
+      <div>
+     
+<Button variant="contained" onClick={handleFormSubmit} color="primary">
+  Sign Up
+</Button>
+
+      </div>
+      
+    </div>
+    )
+}
+
+export default SignUp
