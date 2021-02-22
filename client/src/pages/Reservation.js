@@ -1,36 +1,51 @@
-import React from "react";
+import React from, { useState, useEffect } "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper, TextField, Button } from "@material-ui/core";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  },
-  header: {
-    marginRight: "20px",
-  },
-}));
-
-const makeReservation = (props,event) => {
-  API.postReservation({
-    dateandtime: props.dateandtime,
-  })
-    .then((res) => console.log(res.data))
-    .catch((res) => console.error("Reservation did not post"));
-};
 
 const Reservation = (props) => {
-  const classes = useStyles();
+  const useStyles = makeStyles((theme) => ({
+    container: {
+      display: "flex",
+      flexWrap: "wrap",
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
+    header: {
+      marginRight: "20px",
+    },
+  }));
   const currentTimeDate = Date.now();
+
+  // Setting our component's initial state
+  const [reservations, setReservations] = useState([])
+  const [formObject, setFormObject] = useState({})
+  // Load all books and store them with setBooks
+  useEffect(() => {
+    loadReservations()
+  }, [])
+
+  function loadReservations() {
+    API.getReservations()
+      .then(res => 
+        setReservations(res.data)
+      )
+      .catch(err => console.log(err));
+  };
+
+  function handleInputChange(event) {
+    const { dateTime, value } = event.target;
+    setFormObject({...formObject, [dateTime]: value})
+  };
+
+
+
 
   return (
     <>
