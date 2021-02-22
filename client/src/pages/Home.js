@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col } from "reactstrap";
 import Map from "../components/Map";
 import SimpleList from "../components/Applist";
-import AppCard from "../components/appcard";
+import AppCard from "../components/Appcard";
 const Home = (props) => {
     return(
 <div className="restaurants">

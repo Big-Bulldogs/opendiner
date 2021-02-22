@@ -12,5 +12,8 @@ export default {
     },
     login: function(login){
         return axios.post('http://localhost:3005/login',login)
+    },
+    postReservation: function (reservation){
+        return axios.post('http://localhost:3005/newreservation',reservation)
     }
 }
