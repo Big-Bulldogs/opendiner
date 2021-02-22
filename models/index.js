@@ -2,5 +2,6 @@ module.exports = {
     Restaurant: require("./restaurant"),
     Menu: require("./menu"),
     Item: require("./menuitem"),
-    User: require("./user")
+    User: require("./user"),
+    Reservation: require("./reservation")
   };
