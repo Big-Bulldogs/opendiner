@@ -13,10 +13,33 @@ const Login = () => {
       '& > *': {
         margin: theme.spacing(1),
         width: theme.spacing(300),
-        height: theme.spacing(16)
-      }
-    }
+        height: theme.spacing(16),
+      },
+    },
   }));
+const Login = () => {
+    const classes = useStyles();
+    const [formObject, setFormObject] = useState({})
+
+    function handleInputChange(event){
+        const {name,value} = event.target;
+        setFormObject({...formObject, [name]:value})
+        
+    }
+
+    function handleFormSubmit(event){
+        event.preventDefault()
+        API.login({
+            email: formObject.email,
+            password: formObject.password
+        })
+        .then(res => {
+            console.log(res.data)
+            useHistory.push('/home')
+        })
+        .catch(err => console.log(err))
+    }
+  };
   const classes = useStyles();
   const [formObject, setFormObject] = useState({});
   const history = useHistory();

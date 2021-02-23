@@ -8,6 +8,8 @@ import store from './store/index'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'leaflet/dist/leaflet.css'
+import "react-datepicker/dist/react-datepicker.css";
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
