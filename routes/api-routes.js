@@ -1,5 +1,6 @@
 const db = require("../models");
-
+const passport = require("../config/passport");
+const { RssFeedTwoTone, ReorderSharp } = require("@material-ui/icons");
 
 module.exports = function(app){
     app.post('/newuser', ({body}, res) => {
@@ -93,6 +94,20 @@ module.exports = function(app){
             res.json(err)
         });
     });
+  app.post('/login', passport.authenticate("local"), function(req, res){
+      res.json(req.user)
+  })
+    
+  app.get("/user_data", function(req,res){
+      if (!req.user){
+          res.json({})
+      } else {
+        res.json({
+            _id: req.user._id,
+            email: req.user.email
+        })
+      }
+  })
     
     
 }
