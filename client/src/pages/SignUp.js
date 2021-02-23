@@ -57,7 +57,7 @@ console.log(formObject)
       <TextField id="standard-basic" onChange={handleInputChange} name="email"  label="Email" />
       </div>
       <div>
-      <TextField id="standard-basic" onChange={handleInputChange} name="password"  label="Password" />
+      <TextField id="standard-basic" onChange={handleInputChange} name="password" type="password" label="Password" />
       </div>
       </Paper>
       <div>
