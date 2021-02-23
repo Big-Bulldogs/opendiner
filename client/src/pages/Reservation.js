@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper, Button, List, ListItem } from "@material-ui/core";
+import { Typography, Paper, Button, List, ListItem, TextField } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import API from "../utils/API";
 import { connect } from "react-redux";
@@ -26,35 +26,38 @@ const Reservation = (props) => {
   const classes = useStyles();
 
   const [reservations, setReservations] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [user, setUser]=useState([]);
-
-  function loadReservations() {
-    API.getUserData()
-      .then((res)=>(console.log(res)))
-      .then((res) => setReservations(res.data.reservations))
-      .then((res)=>setUser(res.data._id))
-      .catch((err) => console.log(err));
-  }
+  const [startDate, setStartDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [user, setUser]=useState("");
 
   useEffect(() => {
-    loadReservations();
+    API.getUserData()
+      .then(res => {
+      console.log(res.data)
+       setReservations(res.data.reservations)
+       setUser(res.data._id)
+       
+      })
+      .catch((err) => console.log(err));
   }, []);
-
+  console.log(user, reservations)
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log("Reservation submitted!")
-    if (startDate.date && startTime.time) {
       API.postReservation({
-        date: startDate.date,
-        time: startTime.time,
-        user: user._id,
+        date: startDate,
+        time: startTime,
+        user: user,
         restaurant:props.selectedLocation._id
       })
-        .then((res) => loadReservations())
+        .then(res => {
+          console.log(res.data)
+        })
         .catch((err) => console.log(err));
-    }
+    
+  }
+  function handleInputChange(event) {
+    const {value } = event.target;
+    setStartTime(value);
   }
 
   return (
@@ -69,14 +72,7 @@ const Reservation = (props) => {
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
-          <DatePicker
-            selected={startTime}
-            onChange={(time) => setStartTime(time)}
-            showTimeSelect
-            showTimeSelectOnly
-            timeCaption="Time"
-            dateFormat="h:mm aa"
-          />
+          <TextField id="outlined-basic" label="Time" onChange={handleInputChange}></TextField>
           <Button
             type="submit"
             color="primary"
@@ -93,7 +89,8 @@ const Reservation = (props) => {
         <List>
           {reservations.map((reservation) => (
             <ListItem key={reservation._id}>
-                `${reservation.date} ${reservation.time} at ${reservation.restaurant.name}`
+                <h3>{reservation.date}</h3><p>@</p><h3>{reservation.time}</h3>
+
             </ListItem>
           ))}
         </List>

@@ -17,29 +17,7 @@ const Login = () => {
       },
     },
   }));
-const Login = () => {
-    const classes = useStyles();
-    const [formObject, setFormObject] = useState({})
 
-    function handleInputChange(event){
-        const {name,value} = event.target;
-        setFormObject({...formObject, [name]:value})
-        
-    }
-
-    function handleFormSubmit(event){
-        event.preventDefault()
-        API.login({
-            email: formObject.email,
-            password: formObject.password
-        })
-        .then(res => {
-            console.log(res.data)
-            useHistory.push('/home')
-        })
-        .catch(err => console.log(err))
-    }
-  };
   const classes = useStyles();
   const [formObject, setFormObject] = useState({});
   const history = useHistory();
@@ -66,7 +44,7 @@ const Login = () => {
           <TextField id="standard-basic" onChange={handleInputChange} name="email" label="Email" />
         </div>
         <div>
-          <TextField id="standard-basic" onChange={handleInputChange} name="password" label="Password" />
+          <TextField id="standard-basic" onChange={handleInputChange} name="password" type="password" label="Password" />
         </div>
       </Paper>
       <div>
