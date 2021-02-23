@@ -2,21 +2,21 @@ import axios from 'axios'
 
 export default {
     getRestaurants: function(){
-        return axios.get('http://localhost:3005/restaurant')
+        return axios.get('/restaurant')
     },
     postUser: function(userData){
-        return axios.post('http://localhost:3005/newuser', userData)
+        return axios.post('/newuser', userData)
     },
     getUser: function(){
-        return axios.get('http://localhost:3005/user')
+        return axios.get('/user')
     },
     login: function(login){
-        return axios.post('http://localhost:3005/login',login)
+        return axios.post('/login',login)
     },
     postReservation: function (reservation){
-        return axios.post('http://localhost:3005/newreservation',reservation)
+        return axios.post('/newreservation',reservation)
     },
     getUserData: function(){
-        return axios.get('http://localhost:3005/user_data')
+        return axios.get('/user_data')
     }
 }
