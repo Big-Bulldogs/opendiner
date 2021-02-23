@@ -14,9 +14,12 @@ user: [
   ref: "User",
 },
 ],
-  dateandtime: {
+  date: {
     type: String,
   },
+  time:{
+    type: String,
+  }
 });
 
 const Reservation = mongoose.model("reservation", ReservationSchema);
