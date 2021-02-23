@@ -102,12 +102,7 @@ module.exports = function(app){
       if (!req.user){
           res.json({})
       } else {
-        res.json({
-            _id: req.user._id,
-            email: req.user.email,
-            reservations: req.user.reservations
-            
-        })
+        res.json(req.user)
       }
   })
     
