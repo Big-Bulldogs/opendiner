@@ -20,6 +20,7 @@ function App() {
         
       <Route exact path='/' component={Login}></Route>
       <Route path="/login" component={Login}></Route>
+      <Route path="/signup" component={SignUp}></Route>
       <Route path="/home" component={Home}></Route>
      <Route path='/order' component={OrderForm}></Route>
      <Route path='/reservation' component={Reservation}></Route>
