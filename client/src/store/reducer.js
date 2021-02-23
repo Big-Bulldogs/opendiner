@@ -2,7 +2,8 @@ const initialState = {
     restaurants: [],
     currentLocation: [51.5,55],
     selectedLocation: {},
-    hasLoaded: false
+    hasLoaded: false,
+    selectedItems: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +28,11 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 hasLoaded: action.value
+            }
+        case 'SELECTEDITEMS':
+            return{
+                ...state,
+                selectedItems: action.value
             }
     }
     return state
