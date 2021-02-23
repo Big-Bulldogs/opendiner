@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Typography,
-  Paper,
-  TextField,
-  Button,
-  Card,
-  List,
-  ListItem,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Typography, Paper, Button, List, ListItem } from "@material-ui/core";
+import DatePicker from "react-datepicker";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { updateData } from "../store/actions/fetchRestaurants";
@@ -29,34 +21,36 @@ const Reservation = (props) => {
       marginRight: "20px",
     },
   }));
-  const currentTimeDate = Date.now();
+
+  // const currentTimeDate = Date.now();
   const classes = useStyles();
 
   const [reservations, setReservations] = useState([]);
-  const [formObject, setFormObject] = useState({});
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date());
+  const [user, setUser]=useState([]);
+
+  function loadReservations() {
+    API.getUserData()
+      .then((res)=>(console.log(res)))
+      .then((res) => setReservations(res.data.reservations))
+      .then((res)=>setUser(res.data._id))
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     loadReservations();
   }, []);
 
-  function loadReservations() {
-    API.getUser()
-      .then(
-        (res) => console.log(res.data) //setReservations
-      )
-      .catch((err) => console.log(err));
-  }
-
-  function handleInputChange(event) {
-    const { dateTime, value } = event.target;
-    setFormObject({ ...formObject, [dateTime]: value });
-  }
-
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (formObject.dateTime) {
+    console.log("Reservation submitted!")
+    if (startDate.date && startTime.time) {
       API.postReservation({
-        dateandtime: formObject.dateTime.toISOString(),
+        date: startDate.date,
+        time: startTime.time,
+        user: user._id,
+        restaurant:props.selectedLocation._id
       })
         .then((res) => loadReservations())
         .catch((err) => console.log(err));
@@ -66,23 +60,23 @@ const Reservation = (props) => {
   return (
     <>
       <Paper elevation={3}>
-        <Typography component="h3" variant="p" className={classes.header}>
+        <Typography component="h1" className={classes.header}>
           Reservation for {props.selectedLocation.name}
         </Typography>
         <form className={classes.container} noValidate>
-          <p>
-            <TextField
-              id="datetime-local"
-              label="Next reservation"
-              type="datetime-local"
-              defaultValue={currentTimeDate}
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={handleInputChange}
-            />
-          </p>
+          <DatePicker
+            dateFormat="yyyy/MM/dd"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+          <DatePicker
+            selected={startTime}
+            onChange={(time) => setStartTime(time)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeCaption="Time"
+            dateFormat="h:mm aa"
+          />
           <Button
             type="submit"
             color="primary"
@@ -95,15 +89,11 @@ const Reservation = (props) => {
         </form>
       </Paper>
       <Typography component="h1">Reservation History</Typography>
-      {reservations.length ? (
+      {reservations ? (
         <List>
           {reservations.map((reservation) => (
             <ListItem key={reservation._id}>
-              <Link to={"/reservations/" + reservation._id}>
-                <strong>
-                  {reservation.dateandtime} at
-                </strong>
-              </Link>
+                `${reservation.date} ${reservation.time} at ${reservation.restaurant.name}`
             </ListItem>
           ))}
         </List>
