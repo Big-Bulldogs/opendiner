@@ -26,19 +26,16 @@ passwordField: 'password'
 ));
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user.id);
   });
   
   passport.deserializeUser(function(id, done) {
     db.User.findById(id)
     .populate('reservations')
-    .exec(function(err, data){
-      if (err){
-        console.log(err)
-      } else {
-        done(null, data)
-      }
+    .exec(function(err,user){
+      done(err,user)
     })
+    
   });
 // Exporting our configured passport
 module.exports = passport;

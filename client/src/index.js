@@ -7,7 +7,6 @@ import {Provider} from 'react-redux'
 import store from './store/index'
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'leaflet/dist/leaflet.css'
 import "react-datepicker/dist/react-datepicker.css";
 
 ReactDOM.render(

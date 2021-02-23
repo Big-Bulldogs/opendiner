@@ -8,7 +8,6 @@ const AdminBro = require('admin-bro')
 const AdminBroExpress = require('@admin-bro/express')
 const AdminBroMongoose = require('@admin-bro/mongoose')
 var session = require("express-session");
-
 const db = require("./models");
 
 
@@ -18,18 +17,19 @@ app.use(logger("dev"));
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(session({
+  
+  secret: 'hello world',
+  resave: true,
+  saveUninitialized: true
+}))
 app.use(passport.initialize());
 app.use(passport.session());
-//Not sure how to configure this yet
-// app.get("/", function (req, res) { 
-//   res.sendFile(__dirname + "/public/login.html");
-// });
 
 
 
 const run = async() => {
-  const connection = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true });
+  const connection = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/opendiner", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: false });
 
   const adminBro = new AdminBro({
     databases: [connection],
@@ -41,8 +41,12 @@ const run = async() => {
 }
 run()
 
+if (process.env.NODE_ENV === 'production'){
+  app.use(express.static("client/build"));
+}
+  
 
-app.use(express.static("public"));
+
 
 // mongoose.set('useFindAndModify', false);
 require('./routes/api-routes')(app)

@@ -1,7 +1,6 @@
 const db = require("../models");
 const passport = require("../config/passport");
-const { RssFeedTwoTone, ReorderSharp } = require("@material-ui/icons");
-
+const connectEnsureLogin = require('connect-ensure-login');
 module.exports = function(app){
     app.post('/newuser', ({body}, res) => {
         db.User.create(body)
@@ -95,7 +94,10 @@ module.exports = function(app){
         });
     });
   app.post('/login', passport.authenticate("local"), function(req, res){
+    res.cookie("loggedin", "true");
       res.json(req.user)
+    
+   
   })
     
   app.get("/user_data", function(req,res){
