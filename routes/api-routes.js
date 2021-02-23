@@ -104,7 +104,9 @@ module.exports = function(app){
       } else {
         res.json({
             _id: req.user._id,
-            email: req.user.email
+            email: req.user.email,
+            reservations: req.user.reservations
+            
         })
       }
   })
